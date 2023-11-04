@@ -3,3 +3,5 @@ media/
 
 **/__pycache/
 *.pyc
+
+db.sqlite3
