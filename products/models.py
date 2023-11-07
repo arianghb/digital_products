@@ -47,6 +47,7 @@ class File(models.Model):
         (FILE_VIDEO, _('video')),
         (FILE_PDF, _('pdf'))
     )
+    
     product = models.ForeignKey('Product', verbose_name=_('product'), related_name='files', on_delete=models.CASCADE)
     title = models.CharField(_('title'), max_length=50)
     description = models.TextField(_('description'), blank=True)    
