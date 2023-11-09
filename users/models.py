@@ -94,7 +94,7 @@ class User(AbstractUser):
             )
         ],
         error_messages={
-            "unique": _("A user this this phone number already exists.")
+            "unique": _("A user whith this phone number already exists.")
         }
     )
     is_staff = models.BooleanField(
@@ -145,6 +145,14 @@ class User(AbstractUser):
         Return True if user has actually logged in with valid credentials
         """
         return self.phone_number is not None or self.email is not None
+    
+    def save(self, *args, **kwargs):
+        """
+        Handle blank email for not conflicting unique field
+        """
+        if self.email is not None and self.email.strip() == '':
+            self.email = None
+        super().save(*args, **kwargs)
 
 
 class UserProfile(models.Model):
